@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:lupv="http://lms.alr.dk.ibm.com/service/LicenseUseData/ParseValidate/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="LicenseUseParseValidate" targetNamespace="http://lms.alr.dk.ibm.com/service/LicenseUseData/ParseValidate/" xmlns:req="http://lms.alr.dk.ibm.com/service/LicenseUseData/ValidationRequest" xmlns:res="http://lms.alr.dk.ibm.com/service/LicenseUseData/ValidationResult">
+  <wsdl:types>
+    <xsd:schema targetNamespace="lms.alr.dk.ibm.com/service/LicenseUseData/ParseValidate" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="lms.alr.dk.ibm.com/service/LicenseUseData/ParseValidate">
+      <xsd:import namespace="http://lms.alr.dk.ibm.com/service/LicenseUseData/ValidationRequest" schemaLocation="LicenseUseDataValidationRequest.xsd"></xsd:import>
+      <xsd:import namespace="http://lms.alr.dk.ibm.com/service/LicenseUseData/ValidationResult" schemaLocation="LicenseUseDataValidationResult.xsd"></xsd:import>
+
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ValidationOutput">
+    <wsdl:part element="res:LicenseUseDataValidationResult" name="ValidationOutput"/>
+  </wsdl:message>
+  <wsdl:message name="ValidationInput">
+    <wsdl:part element="req:LicenseUseDataValidationRequest" name="ValidationInput"/>
+  </wsdl:message>
+  <wsdl:portType name="LicenseUseParseValidate">
+    <wsdl:operation name="parseValidate">
+      <wsdl:input message="lupv:ValidationInput"/>
+      <wsdl:output message="lupv:ValidationOutput"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LicenseUseParseValidateSOAP" type="lupv:LicenseUseParseValidate">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="parseValidate">
+      <soap:operation soapAction="http://lms.alr.dk.ibm.com/LicenseUseParseValidate/NewOperation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LicenseUseParseValidate">
+    <wsdl:port binding="lupv:LicenseUseParseValidateSOAP" name="LicenseUseParseValidateSOAP">
+      <soap:address location="http://tempuri.org"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://lms.alr.dk.ibm.com/service/LicenseUseData/ValidationResult" xmlns:wwlm="http://wwlm.alr.dk.ibm.com/shared" xmlns:res="http://lms.alr.dk.ibm.com/service/LicenseUseData/ValidationResult">
+	<xsd:import namespace="http://wwlm.alr.dk.ibm.com/shared" schemaLocation="WwlmTemplateLibrary.xsd"></xsd:import>
+
+	<xsd:element name="ReceiveTimeStamp" type="wwlm:Timestamp"></xsd:element>
+
+	<!-- Elements -->
+
+	<xsd:element name="LicenseUseDataValidationResult" type="res:ApplicationOutputType">
+		<xsd:annotation>
+			<xsd:documentation>This is the application specific output element used</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:element name="ApplicationArea" type="wwlm:ApplicationAreaOut">
+		<xsd:annotation>
+			<xsd:documentation>OutputSpecific ApplicationArea element</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+
+	<!--  Complex types -->
+
+
+	<xsd:complexType name="ApplicationOutputType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Is where the information that the BOD message carries is provided, in this case AcknowledgeElectronicEntitlement.
+				The information consists of a Verb and one or more Nouns. The verb (Acknowledge) indicates the action to be
+				performed on the Noun (ElectronicEntitlement).
+			</xsd:documentation>
+		</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element ref="res:ApplicationArea" />
+					<xsd:element name="DataArea" type="res:ValidationResultDataArea" />
+				</xsd:sequence>
+
+	</xsd:complexType>
+
+	<xsd:complexType name="ValidationResultDataArea">
+		<xsd:annotation>
+			<xsd:documentation>
+				Is where the information that the message carries is provided. This is done by using the Verb which indicates the
+				action to be performed on the Noun and 1 or more Nouns, which is the object that the action is to be performed.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="validationResult" type="xsd:string" maxOccurs="1" minOccurs="0"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!-- Simple types -->
+
+
+</xsd:schema>

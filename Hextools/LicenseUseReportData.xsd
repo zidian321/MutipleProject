@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zscm.lms.alr.dk.ibm.com/LicenseUseData" xmlns:lud="http://zscm.lms.alr.dk.ibm.com/LicenseUseData">
+
+	<element name="license-use-data" type="lud:license-use-data"></element>
+
+	<complexType name="license-use-data">
+		<sequence>
+			<element name="user-info" type="lud:user-info" minOccurs="1" maxOccurs="1"></element>
+			<element name="application-data" type="lud:application-data" minOccurs="1" maxOccurs="1"></element>
+			<element name="submitter" type="lud:submitter" minOccurs="1" maxOccurs="1"></element>
+			<element name="customer" type="lud:customer" minOccurs="1" maxOccurs="1"></element>
+			<element name="machine" type="lud:machine" minOccurs="1" maxOccurs="1"></element>
+			<element name="tool-info" type="lud:tool-info" minOccurs="1" maxOccurs="1"></element>
+			<element name="OSF" type="lud:OSF" minOccurs="1" maxOccurs="1"></element>
+			<element name="product-use-data-list" minOccurs="1" maxOccurs="unbounded" type="lud:product-use-data">
+			</element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="user-info">
+		<sequence>
+			<element name="user-id" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="kms-id" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="unique-identifier" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="iso-country" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="session-id" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="application-data">
+		<sequence>
+			<element name="application-id" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="send-confirmation" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="distribution-list" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="unique-request-id" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="submit-date" type="dateTime" minOccurs="1" maxOccurs="1"></element>
+			<element name="upload-date" type="dateTime" minOccurs="1" maxOccurs="1"></element>
+			<element name="run-date-time" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="system-status" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="submitter">
+		<sequence>
+			<element name="name" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="email" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="phone" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+		
+	<complexType name="customer">
+		<sequence>
+			<element name="customer-name" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="customer-country" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="customer-number" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="provided-customer-name" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="provided-customer-number" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="machine">
+		<sequence>
+			<element name="machine-serial" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="machine-type" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="machine-capacity" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="provided-machine-capacity" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="designated-machine" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="tool-info">
+		<sequence>
+			<element name="tool-name" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="tool-version-release" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="tool-version" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="tool-release" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="tool-os390" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="tool-os31bit" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="tool-report-period-fullstring" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="tool-report-period" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="tool-report-period-start" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="tool-report-period-end" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="submission-late-flag" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="wrong-version-flag" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="collected-low-flag" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="first-submission-flag" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="running-zose-flag" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="ipla-products-flag" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="customer-msu-flag" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="migration-flag" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="customer-set-flag" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+	<complexType name="OSF">
+		<sequence>
+			<element name="OSF-name" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="OSF-percents-data-collected" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="OSF-low-data-just" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="collected-low-flag" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="product-use-data">
+		<sequence>
+			<element name="product-type" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="product-name" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="product-id" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="product-number" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="product-pricing-metric" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="tool-msu" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+		<attribute name="sequence" type="positiveInteger" use="required"></attribute>
+	</complexType>
+
+	<complexType name="submitted-data">
+		<sequence>
+			<element name="row" type="string" minOccurs="1" maxOccurs="unbounded"></element>
+		</sequence>
+		<attribute name="id" type="positiveInteger" use="required"></attribute>
+	</complexType>
+
+
+</schema>

@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zscm.lms.alr.dk.ibm.com/LicenseUseData" xmlns:lud="http://zscm.lms.alr.dk.ibm.com/LicenseUseData">
+	
+	
+	<complexType name="ProcessStatus">
+		<sequence>
+			<element name="code" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="text" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ProcessStatusList">
+		<sequence>
+			<element name="ProcessList" type="lud:ProcessStatus" minOccurs="0" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+	
+
+	<complexType name="OSF">
+		<sequence>
+			<element name="OSF-name" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="percentage-data-collected" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="low-data-justification" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="collected-low" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="wrong-customer-value" type="string" minOccurs="1" maxOccurs="1" default="N"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="OSFList">
+		<sequence>
+			<element name="OSF" type="lud:OSF" minOccurs="0" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="SpecialConditionList">
+		<sequence>
+			<element name="special-condition-data" type="lud:SpecialConditionElement" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="mvs-detect" type="boolean" minOccurs="0" maxOccurs="1"></element>
+			<element name="zos-in-31bit" type="boolean" minOccurs="0" maxOccurs="1"></element>
+			<element name="zvse-in-31bit" type="boolean" minOccurs="0" maxOccurs="1"></element>
+			<element name="has-entries" type="boolean" minOccurs="1" maxOccurs="1" default="false"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="SpecialConditionField">
+		<sequence>
+			<element name="component" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="isEditable" type="boolean" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	
+		<complexType name="SpecialConditionElement">
+				<sequence>
+					<element name="sequence-number" type="nonNegativeInteger" minOccurs="1" maxOccurs="1"></element>
+					<element name="number-of-columns" type="nonNegativeInteger" minOccurs="0" maxOccurs="1"></element>
+					<element name="fields" type="lud:SpecialConditionField" minOccurs="0" maxOccurs="8"></element>
+					<element name="header" type="boolean" minOccurs="1" maxOccurs="1" default="false"></element>
+					<element name="wrong-customer-value" type="string" minOccurs="1" maxOccurs="1" default="N"></element>
+				</sequence>	
+		</complexType>
+
+	
+	<complexType name="Lpar">
+		<sequence>
+			<element name="Name" type="string"></element>
+			<element name="Sysid" type="string"></element>
+			<element name="inputDataStart" type="string"></element>
+			<element name="inputDataEnd" type="string"></element>
+			<element name="line-id" type="string"></element>
+			<element name="reportPeriodePercent" type="string"></element>
+			<element name="comment" type="string"></element>
+			<element name="wrong-customer-value" type="string" minOccurs="1" maxOccurs="1" default="N"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="CPSList">
+		<sequence>
+			<element name="CPS" type="lud:CPS" minOccurs="1" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="CPS">
+		<sequence>
+			<element name="Identifier" type="string"></element>
+			<element name="SolutionID" type="string"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="CPSDetailList">
+		<sequence>
+			<element name="CPSDetail" type="lud:CPSDetail" minOccurs="1" maxOccurs="1"></element>
+			<element name="CPSActiveList" type="lud:CPSActiveList" minOccurs="1" maxOccurs="1"></element>
+			<element name="CPSMetricsList" type="lud:CPSMetricsList" minOccurs="0" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="CPSDetail">
+		<sequence>
+			<element name="SolutionID" type="string"></element>
+			<element name="SolutionName" type="string"></element>
+			<element name="PeakAverage" type="string"></element>
+			<element name="TotalHours" type="string"></element>
+			<element name="Identifier" type="string"></element>				
+		</sequence>
+	</complexType>
+	
+	<complexType name="CPSMetricsList">
+		<sequence>
+			<element name="CPSMetrics" type="lud:CPSMetrics" minOccurs="1" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+	
+	
+	<complexType name="CPSMetrics">
+		<sequence>
+			<element name="ProductName" type="string"></element>
+			<element name="ProductID" type="string"></element>
+			<element name="ProductUnits" type="string"></element>
+			<element name="ProductMetric" type="string"></element>		
+		</sequence>
+	</complexType>
+
+	<complexType name="CPSActiveList">
+		<sequence>
+			<element name="CPSActive" type="lud:CPSActive" minOccurs="1" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="CPSActive">
+		<sequence>
+			<element name="ProductName" type="string"></element>
+			<element name="ProductID" type="string"></element>	
+		</sequence>
+	</complexType>	
+<!--  generic LicenseUseData  -->
+
+	<complexType name="LicenseUseData">
+		<sequence>
+			<element name="backend-status" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="current-status" type="lud:ProcessStatus" minOccurs="0" maxOccurs="1"></element>
+			<element name="customer-comment" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="customer-name" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="customer-number" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="error-list" type="lud:ProcessStatusList" minOccurs="0" maxOccurs="1"></element>
+			<element name="has-errors" type="boolean" minOccurs="0" maxOccurs="1"></element>
+			<element name="low-data-collection-comment" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="machine-msu" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="machine-serial-number" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="machine-type-model" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="is-MVS-or-OS390" type="boolean" minOccurs="0" maxOccurs="1"></element>
+			<element name="original-tool-percentage-collected" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="original-tool-zfpt-collected" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="os-divert-comment" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="osf-list" type="lud:OSFList" minOccurs="0" maxOccurs="1"></element>
+			<element name="provided-customer-name" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="provided-customer-number" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="provided-machine-msu" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="run-date" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="special-conditions" type="lud:SpecialConditionList" minOccurs="0" maxOccurs="1"></element>
+			<element name="submit-date" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="hash-code-ok" type="boolean" minOccurs="0" maxOccurs="1"></element>
+			<element name="hash-error-section" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="submitted" type="boolean" minOccurs="0" maxOccurs="1"></element>
+			<element name="uploaded" type="boolean" minOccurs="0" maxOccurs="1"></element>
+			<element name="submitter-email" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="submitter-name" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="submitter-phone" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="tool-period" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="tool-period-end" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="tool-period-start" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="tool-percentage-collected" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="tool-release" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="unique-request-id" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="upload-date" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="warning-list" type="lud:ProcessStatusList" minOccurs="1" maxOccurs="1" ></element>
+			<element name="has-warnings" type="boolean" minOccurs="0" maxOccurs="1"></element>
+			<element name="zose-msu-per-engine" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="zose-physical-engines" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="zose-pricing-engines" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="zose-tool-msu" type="string" minOccurs="0" maxOccurs="1" default=""></element>
+			<element name="zose-31bit" type="boolean" minOccurs="0" maxOccurs="1"></element>
+			<element name="Lpar-List" type="lud:LParList" minOccurs="0" maxOccurs="1"></element>
+			<element name="resubmit-justification" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="missing-resubmit-justification" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="country-number" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="machine-model-observed" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="mobile-scrt" type="boolean" minOccurs="0" maxOccurs="1"></element>
+			<element name="mvm" type="boolean" minOccurs="0" maxOccurs="1"></element>
+			
+			<element name="CPSList" type="lud:CPSList" minOccurs="0" maxOccurs="1"></element>
+			<element name="CPSDetailList" type="lud:CPSDetailList" minOccurs="0" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="LParList">
+		<sequence>
+			<element name="Lpar" type="lud:Lpar" minOccurs="0" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+
+
+<!-- sub cap -->
+
+	<complexType name="SubCapProductEntry">
+		<sequence>
+			<element name="product-name" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="product-id" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="product-tool-msu" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="product-customer-msu" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="product-customer-comment" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="product-type" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="product-intended-pricing-metric" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="product-entry" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="product-footnote" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="line" type="nonNegativeInteger" minOccurs="0" maxOccurs="1"></element>
+			<element name="should-show" type="string" minOccurs="1" maxOccurs="1" default="N"></element>
+			<element name="wrong-customer-value" type="string" minOccurs="1" maxOccurs="1" default="N"></element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="SubCapProductList">
+		<sequence>
+			<element name="product-entry" type="lud:SubCapProductEntry" minOccurs="0" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="SubCapData">
+		<sequence>
+			<element name="product-list" type="lud:SubCapProductList" minOccurs="0" maxOccurs="1"></element>
+			<element name="ipla-product-list" type="lud:SubCapProductList" minOccurs="0" maxOccurs="1"></element>
+			<element name="ipla-nonmsu-product-list" type="lud:SubCapProductList" minOccurs="0" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="SubCapLicenseUseData">
+		<complexContent>
+
+			<extension base="lud:LicenseUseData">
+				<sequence minOccurs="0" maxOccurs="1">
+					<element name="subCapData" type="lud:SubCapData" minOccurs="1" maxOccurs="1"></element>
+					<element name="missing-lpar" type="lud:MissingData" minOccurs="1" maxOccurs="1"></element>
+					<element name="missing-cpc" type="lud:MissingData" minOccurs="1" maxOccurs="1"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+
+	<complexType name="SubCapLicenseUseDataList">
+		<sequence>
+			<element name="sub-cap-data" type="lud:SubCapLicenseUseData" minOccurs="1" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+
+
+<!-- full cap -->
+
+	<complexType name="FullCapProductEntry">
+		<sequence>
+			<element name="product-name" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="product-id" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="product-tool-hours" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="product-customer-comment" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="product-type" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="product-entry" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="product-footnote" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="line" type="nonNegativeInteger" minOccurs="0" maxOccurs="1"></element>
+			<element name="wrong-customer-value" type="string" minOccurs="1" maxOccurs="1" default="N"></element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="FullCapProductList">
+		<sequence>
+			<element name="product-entry" type="lud:FullCapProductEntry" minOccurs="0" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="FullCapData">
+		<sequence>
+			<element name="product-list" type="lud:FullCapProductList" minOccurs="0" maxOccurs="1"></element>
+			<element name="ipla-product-list" type="lud:FullCapProductList" minOccurs="0" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+	
+	
+	<complexType name="FullCapLicenseUseData">
+		<complexContent>
+			<extension base="lud:LicenseUseData">
+				<sequence minOccurs="1" maxOccurs="1">
+					<element name="fullCapData" type="lud:FullCapData" minOccurs="1" maxOccurs="1"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="FullCapLicenseUseDataList">
+		<sequence>
+			<element name="full-cap-data" type="lud:FullCapLicenseUseData" minOccurs="1" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+	
+	<!-- multiplex -->
+	<complexType name="MultiplexLicenseUseData">
+		<complexContent>
+			<extension base="lud:LicenseUseData">
+				<sequence>
+					<element name="unique-mrt-request-id" type="string" minOccurs="1" maxOccurs="1"></element>					
+					<element name="integrated-workload-pricing" type="string" minOccurs="1" maxOccurs="1"></element>
+					<element name="multiplex-processers-number" type="string" minOccurs="1" maxOccurs="1"></element>
+					<element name="mlc-product-peak-list" type="lud:ProductPeakList" minOccurs="1" maxOccurs="1"></element>
+					<element name="ipla-product-peak-list" type="lud:ProductPeakList" minOccurs="1" maxOccurs="1"></element>
+					<element name="ipla-nonmsu-product-peak-list" type="lud:ProductPeakList" minOccurs="1" maxOccurs="1"></element>
+					<element name="machine-list" type="lud:MachineList" minOccurs="1" maxOccurs="1"></element>
+					<element name="dummyMachineId" type="string" minOccurs="1" maxOccurs="1"></element>			
+					<element name="cps-product-peak-list" type="lud:ProductPeakList" minOccurs="1" maxOccurs="1"></element>	
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="ProductPeakList">
+		<sequence>
+			<element name="product-peak-entry" type="lud:ProductPeakEntry" minOccurs="1" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="ProductPeakEntry">
+		<sequence>
+			<element name="product-name" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="product-id" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="product-msu-peak" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="product-msu-peak-time" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="line" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="MachineList">
+		<sequence>
+			<element name="machine-entry" type="lud:MachineEntry" minOccurs="1" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="MachineEntry">
+		<sequence>
+			<element name="error-list" type="lud:ProcessStatusList" minOccurs="0" maxOccurs="1"></element>
+			<element name="has-errors" type="boolean" minOccurs="0" maxOccurs="1"></element>
+			<element name="warning-list" type="lud:ProcessStatusList" minOccurs="1" maxOccurs="1" ></element>
+			<element name="has-warnings" type="boolean" minOccurs="0" maxOccurs="1"></element>
+			<element name="customer-name" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="customer-country" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="customer-number" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="provided-customer-number" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="enterprise-customer-number" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="machine-model-observed" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="machine-identifier" type="string" minOccurs="1" maxOccurs="1"></element>		
+			<element name="machine-serial-number" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="machine-type-model" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="machine-msu" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="unique-request-id" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="special-conditions" type="lud:SpecialConditionList" minOccurs="0" maxOccurs="1"></element>
+			<element name="product-summary-info" type="lud:SubCapData" minOccurs="1" maxOccurs="1"></element>
+			<element name="missing-lpar-flag" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="missing-cpc-flag" type="string" minOccurs="1" maxOccurs="1"></element>			
+			<element name="missing-lpar" type="lud:MissingData" minOccurs="1" maxOccurs="1"></element>
+			<element name="missing-cpc" type="lud:MissingData" minOccurs="1" maxOccurs="1"></element>
+			<element name="CPSList" type="lud:CPSList" minOccurs="0" maxOccurs="1"></element>
+			<element name="CPSDetailList" type="lud:CPSDetailList" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="dummyMachineId" type="string" minOccurs="1" maxOccurs="1"></element>		
+		</sequence>
+	</complexType>
+	
+	<complexType name="MissingData">
+		<sequence>
+			<element name="missing-status" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="SMF70-SMF89-missing-list" type="lud:MissingDataLineList" minOccurs="0" maxOccurs="1"></element>
+			<element name="SMF-SCRT89-missing-list" type="lud:MissingDataLineList" minOccurs="0" maxOccurs="1"></element>
+			<element name="OSProductList" type="lud:OSProductList" minOccurs="0" maxOccurs="1"></element>
+			</sequence>
+	</complexType>
+	
+	<complexType name="MissingDataLineList">
+		<sequence>
+			<element name="MissingDataLineEntry" type="lud:MissingDataLineEntry" minOccurs="0" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="OSProductList">
+		<sequence>
+			<element name="OSProductEntry" type="lud:OSProductEntry" minOccurs="0" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="MissingDataLineEntry">
+		<sequence>
+			<element name="system-id" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="detected-time" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="resolved-time" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="est-peak-msu" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="justification-for-low-data" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="line" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="OSProductEntry">
+		<sequence>
+			<element name="osProduct-name" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="osProduct-id" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="osProduct-est-peak-msu" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="osProduct-mul-est-peak-msu" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="osProduct-date" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="line" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+	<!-- data list -->
+	<complexType name="LicenseUseSubmissionList">
+		<sequence>
+			<element name="license-use-data" type="lud:LicenseUseData" minOccurs="0" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+	
+    <!--  elements -->
+    <element name="license-use-submission-list" type="lud:LicenseUseSubmissionList"></element> 
+
+	<element name="sub-cap-license-use-data" type="lud:SubCapLicenseUseData"></element>
+
+	<element name="full-cap-license-use-data" type="lud:FullCapLicenseUseData"></element>
+	
+	<element name="multiplex-license-use-data" type="lud:MultiplexLicenseUseData"></element>
+
+</schema>

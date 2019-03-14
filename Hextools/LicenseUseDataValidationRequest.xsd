@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://lms.alr.dk.ibm.com/service/LicenseUseData/ValidationRequest"  xmlns:wwlm="http://wwlm.alr.dk.ibm.com/shared" xmlns:req="http://lms.alr.dk.ibm.com/service/LicenseUseData/ValidationRequest">
+	<xsd:import namespace="http://wwlm.alr.dk.ibm.com/shared" schemaLocation="WwlmTemplateLibrary.xsd"></xsd:import>
+
+	<xsd:element name="LicenseUseDataValidationRequest" type="req:ApplicationRequest">
+		<xsd:annotation>
+			<xsd:documentation>The application specific with shared elements -input message</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+		<xsd:complexType name="ValidationRequestDataArea">
+			<xsd:sequence maxOccurs="1" minOccurs="1">
+			<xsd:element name="file-content" type="xsd:base64Binary" minOccurs="1" maxOccurs="1"></xsd:element>
+			<xsd:element name="kms-id" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+			<xsd:element name="nls-language" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+			<xsd:element name="submissionContext" type="req:SubmissionContext" minOccurs="1" maxOccurs="1"></xsd:element>
+			<xsd:element name="sessionID" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element>
+			<xsd:element name="isSTS" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+
+	<xsd:element name="ApplicationArea" type="wwlm:ApplicationAreaIn">
+		<xsd:annotation>
+			<xsd:documentation>Input Specific ApplicationArea element</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- Complex types -->
+
+	<xsd:complexType name="ApplicationRequest">
+		<xsd:sequence maxOccurs="1" minOccurs="1">
+			<xsd:element maxOccurs="1" minOccurs="1" ref="req:ApplicationArea" />
+			<xsd:element maxOccurs="1" minOccurs="1" ref="req:DataArea" />
+		</xsd:sequence>
+		<xsd:attribute default="en_US" name="lang" type="xsd:string" />
+		<xsd:attribute default="Production" name="environment" type="xsd:string" />
+		<xsd:attribute default="0.9" name="revision" type="xsd:string" />
+	</xsd:complexType>
+
+	<xsd:element name="DataArea" type="req:ValidationRequestDataArea">
+		<xsd:annotation>
+			<xsd:documentation>Input Specific DataArea element</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:simpleType name="SubmissionContext">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="LMS-Email"></xsd:enumeration>
+			<xsd:enumeration value="LMS-web"></xsd:enumeration>
+			<xsd:enumeration value="LMS-Test"></xsd:enumeration>
+			<xsd:enumeration value="Ext-Test"></xsd:enumeration>
+			<xsd:enumeration value="LMS-web-STS"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema>

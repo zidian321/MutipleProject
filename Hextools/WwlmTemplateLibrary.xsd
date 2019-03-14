@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 1.1 $ -->
+<!-- $Author: eplcsh $ -->
+<!-- $Date: 2008/02/26 13:42:06 $ -->
+<xsd:schema targetNamespace="http://wwlm.alr.dk.ibm.com/shared" xmlns:wwlm="http://wwlm.alr.dk.ibm.com/shared" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:element name="ReceiveTimeStamp" type="wwlm:Timestamp"></xsd:element>
+
+	<!-- Elements -->
+
+	<xsd:element name="Sender" type="wwlm:SenderIn" />
+
+	<xsd:element name="CreationDateTime" type="wwlm:Timestamp" />
+	<xsd:element name="BODId" type="wwlm:BODId" />
+
+	<xsd:element name="LogicalId" type="wwlm:LogicalId" />
+	<xsd:element name="Component" type="wwlm:LogicalId" />
+	<xsd:element name="Task" type="wwlm:LogicalId" />
+
+	<xsd:element name="Severity" type="wwlm:Severity">
+		<xsd:annotation>
+			<xsd:documentation>Global element for severity indications</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:element name="ErrorCode">
+		<xsd:annotation>
+			<xsd:documentation>Application error code</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string" />
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="ErrorDescription" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Error description</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:element name="Application" type="wwlm:Application">
+		<xsd:annotation>
+			<xsd:documentation>This is the area where the application describes the status of the processing</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:element name="ApplicationStatus" type="wwlm:Status">
+		<xsd:annotation>
+			<xsd:documentation>Element for applications error transport</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+
+	<!--  Complex types -->
+
+
+	<xsd:complexType name="ApplicationAreaOut">
+		<xsd:annotation>
+			<xsd:documentation>Global extension of OAGi application areas for output or reply purposes</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="wwlm:ApplicationArea">
+				<xsd:sequence>
+					<xsd:element name="Sender" type="wwlm:SenderOut" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>
+								Identifies characteristics and control identifiers that relate to the application that created the
+								Business Object Document. The sender area can indicate the logical location of the application
+								and/or database server, the application, and the task that was processing to create the BOD.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="wwlm:Application" minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+		<xsd:complexType name="ApplicationAreaIn">
+		<xsd:annotation>
+			<xsd:documentation>Global extension of OAGi application areas for output or reply purposes</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="wwlm:ApplicationArea">
+				<xsd:sequence>
+					<xsd:element name="Sender" type="wwlm:SenderIn" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>
+								Identifies characteristics and control identifiers that relate to the application that created the
+								Business Object Document. The sender area can indicate the logical location of the application
+								and/or database server, the application, and the task that was processing to create the BOD.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+
+	<xsd:complexType name="Application">
+		<xsd:annotation>
+			<xsd:documentation>
+				Global type object for exchanging application specific parameters for this interaction
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="wwlm:ApplicationStatus" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Status">
+		<xsd:annotation>
+			<xsd:documentation>Type for generic status</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="wwlm:Severity" minOccurs="0" />
+			<xsd:element ref="wwlm:ErrorCode" minOccurs="0" />
+			<xsd:element ref="wwlm:ErrorDescription" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Severity">
+		<xsd:annotation>
+			<xsd:documentation>Type for generic error severity notation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="Notice" type="xsd:boolean" minOccurs="0" />
+			<xsd:element name="Warning" type="xsd:boolean" minOccurs="0" />
+			<xsd:element name="Fatal" type="xsd:boolean" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ApplicationArea">
+		<xsd:sequence>
+			<xsd:element name="CreationDateTime" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>
+						is the date time stamp that the given instance of the Business Object Document was created. This date must
+						not be modified during the life of the Business Object Document.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BODId" type="wwlm:BODId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						The BODId provides a place to carry a Globally Unique Identifier (GUID) that will make each Business Object
+						Document instance uniquely identifiable. This is a critical success factor to enable software developers to
+						use the Globally Unique Identifier (GUID) to build the following services or capabilities: 1. Legally
+						binding transactions, 2. Transaction logging, 3. Exception handling, 4. Re-sending, 5. Reporting, 6.
+						Confirmations, 7. Security.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="BusinessObjectDocument">
+		<xsd:attribute name="revision" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:pattern value="\p{N}\.\p{N}\.\p{N}" />
+					<xsd:pattern value="\p{N}\.\p{N}" />
+					<xsd:pattern value="\p{N}\p{N}\.\p{N}\.\p{N}" />
+					<xsd:pattern value="\p{N}\p{N}\.\p{N}" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="DocumentIdType">
+		<xsd:sequence>
+			<xsd:element name="Id" type="wwlm:Id" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Is the identifier of the semantically named document. The position of the Id further defines it&apos;s
+						context and meaning,
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="SenderIn">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="Component" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						Provides a finer level of control than Logical Identifier and represents the business application that
+						issued the Business Object Document. Its use is optional. The Open Applications Group has not constructed
+						the list of valid Component names. A suggestion for naming is to use the application component names used in
+						the scenario diagrams in section two of OAGIS. Example Components may be Inventory, or Payroll.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="SenderOut">
+		<xsd:sequence>
+			<xsd:element name="Component" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Provides a finer level of control than Logical Identifier and represents the business application that
+						issued the Business Object Document. Its use is optional. The Open Applications Group has not constructed
+						the list of valid Component names. A suggestion for naming is to use the application component names used in
+						the scenario diagrams in section two of OAGIS. Example Components may be Inventory, or Payroll.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReferenceId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Enables the sending application to indicate the instance identifier of the event or task that caused the BOD
+						to be created. This allows drill back from the BOD message into the sending application. The may be required
+						in environments where an audit trail must be maintained for all transactions.
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="wwlm:ReferenceId" />
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Id">
+		<xsd:annotation>
+			<xsd:documentation>Generic identifier type with open qualifyingAgency.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="IdOrigin" type="xsd:string" use="optional" />
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+<xsd:complexType name="EmbeddedData">
+    <xsd:annotation>
+      <xsd:documentation>Holds the contents of an inline attachment.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Data" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation>Container to carry the embedded data.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="encoding" type="wwlm:EncodingBase" use="required"/>
+  </xsd:complexType>
+	<!-- Simple types -->
+
+
+	<xsd:simpleType name="LogicalId">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="12" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="BODId">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="40" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="Timestamp">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="30" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="Name">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="30" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="String16">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="16"></xsd:maxLength>
+			<xsd:minLength value="0"></xsd:minLength>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+  <xsd:simpleType name="EncodingBase">
+    <xsd:annotation>
+      <xsd:documentation>The standard set of encoding types from ???</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="base64"/>
+      <xsd:enumeration value="binary"/>
+      <xsd:enumeration value="octal"/>
+      <xsd:enumeration value="plainText"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="ReferenceId">
+  	<xsd:restriction base="wwlm:BODId"></xsd:restriction>
+  </xsd:simpleType>
+
+</xsd:schema>
